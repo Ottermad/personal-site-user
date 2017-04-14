@@ -2,7 +2,7 @@
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-DATABASE_NAME = "ARTICLE_FETCH_DB"
+DATABASE_NAME = "user_db"
 
 
 class Config:

@@ -1,6 +1,6 @@
 """Models file."""
 from app import db
-from flask_bcrypt import generate_password_hash
+from flask_bcrypt import generate_password_hash, check_password_hash
 
 
 class User(db.Model):
@@ -18,4 +18,22 @@ class User(db.Model):
         self.last_name = last_name
         self.email = email
         if password:
-            self.password_hash = generate_password_hash(password)
+            self.password_hash = self.generate_password_hash(password)
+
+    def generate_password_hash(self, password):
+        """Generate a password hash."""
+        hash = generate_password_hash(password)
+        return hash
+
+    def check_password(self, password):
+        """Return True if password correct."""
+        return check_password_hash(self.password_hash, password)
+
+    def to_dict(self):
+        """Convert User object to dictionary."""
+        return {
+            'id': self.pk,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'email': self.email,
+        }
