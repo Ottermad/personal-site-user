@@ -20,7 +20,7 @@ def user_authenticate(request):
     check_keys(expected_keys, json_data)
 
     user = User.query.filter_by(email=json_data['email']).first()
-    if user is not None and user.check_password_hash(json_data['password']):
+    if user is not None and user.check_password(json_data['password']):
         return jsonify(user.to_dict()), 200
     else:
         raise HTTPException(

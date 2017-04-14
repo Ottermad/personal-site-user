@@ -20,7 +20,7 @@ def user_create_or_list():
         return user_create(request)
 
 
-@main_blueprint.route("/authenticate")
+@main_blueprint.route("/authenticate", methods=("POST",))
 def auth_route():
     """Authenticate a user using an email and password."""
     return user_authenticate(request)
